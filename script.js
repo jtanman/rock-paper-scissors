@@ -15,14 +15,32 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  const choice = prompt("Please choose rock, paper, or scissors.").toLowerCase();
-  if (choice === "rock" || choice === "paper" || choice === "scissors") {
-    return choice;
-  } else {
-    console.log("Invalid choice.");
+let buttons = document.querySelector('.buttons')
+let resultsDiv = document.querySelector('.results');
+let resultText = document.createElement('p');
+
+buttons.addEventListener('click', (e) => {
+  if (e.target.tagName === 'BUTTON') {
+    const humanChoice = e.target.id;
+    const computerChoice = getComputerChoice();
+    const result = playRound(humanChoice, computerChoice);
+    resultText.textContent = result;
+    resultsDiv.insertBefore(resultText, resultsDiv.firstChild);
+    console.log(result);
+    playGame();
   }
-}
+})
+
+
+
+// function getHumanChoice() {
+//   const choice = prompt("Please choose rock, paper, or scissors.").toLowerCase();
+//   if (choice === "rock" || choice === "paper" || choice === "scissors") {
+//     return choice;
+//   } else {
+//     console.log("Invalid choice.");
+//   }
+// }
 
 function playRound(humanChoice, computerChoice) {
     console.log(humanChoice);
@@ -57,9 +75,9 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function playGame() {
-  for (let i = 0; i < 5; i++) {
-    console.log(playRound(getHumanChoice(), getComputerChoice()));
-  }
+  // for (let i = 0; i < 5; i++) {
+  //   console.log(playRound(getHumanChoice(), getComputerChoice()));
+  // }
   console.log(`Human Score: ${humanScore}`);
   console.log(`Computer Score: ${computerScore}`);
   if (humanScore > computerScore) {
